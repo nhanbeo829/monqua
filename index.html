@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ĐỊT MẸ CALI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: radial-gradient(ellipse at center, #1b1b1b 0%, #0a0a0a 100%);
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      animation: glow 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
+      animation: moveStripe 60s linear infinite;
+      z-index: 0;
+    }
+    @keyframes glow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes moveStripe {
+      0% { background-position: 0 0; }
+      100% { background-position: 400px 400px; }
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+    .container, .intro-menu {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
+    }
+    .fade-text {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 20px;
+      animation: fadeInText 2s ease-in-out forwards;
+      opacity: 0;
+      text-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #ffffff,
+        0 0 20px #ffffff,
+        0 0 40px #ffffff;
+    }
+    .fade-image {
+      width: 300px;
+      max-width: 80%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      animation: fadeInImg 2.5s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInImg {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .credit {
+      position: fixed;
+      bottom: 10px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      z-index: 3;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 18px;
+      background: white;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #fff;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="particles-js"></div>
+
+  <div class="intro-menu" id="menu">
+    <div class="fade-text">tui có món quà tặng bạn nè🎁</div>
+    <button onclick="startGift()">🎁</button>
+  </div>
+
+  <div class="container" id="main" style="display: none;">
+    <div class="fade-text">HAHA ĐỊT MẸ VNCH, ĐỊT MẸ CALI</div>
+    <img class="fade-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3DunEl6oMp4hdUN9a14c9ehZEJspvwWzajA&s" alt="Ảnh giữa">
+  </div>
+
+  <div class="credit">Credit: nhanbeo</div>
+
+  <audio id="bg-music" loop>
+    <source src="https://media.vocaroo.com/mp3/1ikzqZPQ7k60" type="audio/mpeg">
+    Trình duyệt không hỗ trợ âm thanh.
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 20, "density": { "enable": true, "value_area": 800 } },
+        "shape": {
+          "type": "image",
+          "image": {
+            "src": "https://www.pngall.com/wp-content/uploads/2016/05/Vietnam-Flag-PNG-Image.png",
+            "width": 64,
+            "height": 43
+          }
+        },
+        "opacity": { "value": 0.85, "random": true },
+        "size": { "value": 25, "random": true },
+        "move": {
+          "enable": true,
+          "speed": 1.5,
+          "direction": "none",
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": false },
+          "onclick": { "enable": false },
+          "resize": true
+        }
+      },
+      "retina_detect": true
+    });
+
+    function startGift() {
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("main").style.display = "flex";
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0.5;
+      setTimeout(() => {
+        audio.play().catch(() => {});
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
