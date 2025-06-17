@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ĐỊT MẸ CALI</title>
   <style>
     * {
@@ -13,12 +14,12 @@
       height: 100%;
       width: 100%;
       background: radial-gradient(ellipse at center, #1b1b1b 0%, #0a0a0a 100%);
-      overflow: hidden;
+      overflow: auto; 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: -50%;
       left: -50%;
       width: 200%;
@@ -26,10 +27,11 @@
       background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
       animation: glow 10s ease-in-out infinite alternate;
       z-index: 0;
+      pointer-events: none;
     }
     body::after {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 200%;
@@ -37,6 +39,7 @@
       background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 2px, transparent 2px, transparent 20px);
       animation: moveStripe 60s linear infinite;
       z-index: 0;
+      pointer-events: none;
     }
     @keyframes glow {
       0% { transform: rotate(0deg); }
@@ -46,6 +49,7 @@
       0% { background-position: 0 0; }
       100% { background-position: 400px 400px; }
     }
+
     #particles-js {
       position: fixed;
       top: 0;
@@ -53,11 +57,13 @@
       height: 100%;
       width: 100%;
       z-index: 1;
+      pointer-events: none;
     }
+
     .container, .intro-menu {
       position: relative;
       z-index: 2;
-      height: 100%;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -65,7 +71,9 @@
       text-align: center;
       animation: fadeIn 2s ease-in-out forwards;
       opacity: 0;
+      padding: 20px;
     }
+
     .fade-text {
       font-size: 2rem;
       color: white;
@@ -78,15 +86,17 @@
         0 0 20px #ffffff,
         0 0 40px #ffffff;
     }
+
     .fade-image {
       width: 300px;
-      max-width: 80%;
+      max-width: 90%;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
       animation: fadeInImg 2.5s ease-in-out forwards;
       opacity: 0;
     }
+
     @keyframes fadeIn {
       to { opacity: 1; }
     }
@@ -98,14 +108,20 @@
       0% { opacity: 0; transform: scale(0.9); }
       100% { opacity: 1; transform: scale(1); }
     }
+
     .credit {
       position: fixed;
       bottom: 10px;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.6);
       font-size: 14px;
       z-index: 3;
+      white-space: nowrap;
+      text-align: center;
+      pointer-events: none;
     }
+
     button {
       margin-top: 20px;
       padding: 12px 28px;
@@ -120,6 +136,19 @@
     }
     button:hover {
       background: #eee;
+    }
+
+    @media (max-width: 600px) {
+      .fade-text {
+        font-size: 1.2rem;
+      }
+      .fade-image {
+        width: 90%;
+      }
+      button {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
